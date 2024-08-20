@@ -2,7 +2,7 @@
 name = "esp-wifi"
 version = "0.9.1"
 edition = "2021"
-rust-version  = "1.77.0"
+rust-version = "1.77.0"
 authors = ["The ESP-RS team"]
 description = "A WiFi, Bluetooth and ESP-NOW driver for use with Espressif chips and bare-metal Rust"
 repository = "https://github.com/esp-rs/esp-hal"
@@ -13,11 +13,11 @@ categories = ["embedded", "hardware-support", "no-std"]
 
 [dependencies]
 defmt = { version = "0.3.8", optional = true }
-document-features  = "0.2.10"
+document-features = "0.2.10"
 esp-alloc = { version = "0.4.0", path = "../esp-alloc", optional = true }
 esp-hal = { version = "0.20.0", path = "../esp-hal", default-features = false }
 esp-hal-embassy = { version = "0.3.0", path = "../esp-hal-embassy", default-features = false, optional = true }
-smoltcp = { version = "0.11.0", default-features = false, features = [
+smoltcp = { path = "../../smoltcp", default-features = false, features = [
   "medium-ethernet",
   "socket-raw",
 ], optional = true }
@@ -54,8 +54,8 @@ atomic-waker = { version = "1.1.2", default-features = false, features = [
 bt-hci = { version = "0.1.0", optional = true }
 
 [build-dependencies]
-toml-cfg     = "0.2.0"
-esp-build    = { version = "0.1.0", path = "../esp-build" }
+toml-cfg = "0.2.0"
+esp-build = { version = "0.1.0", path = "../esp-build" }
 esp-metadata = { version = "0.3.0", path = "../esp-metadata" }
 
 [features]
@@ -93,11 +93,7 @@ esp32h2 = [
   "esp-wifi-sys/esp32h2",
 ]
 # Target the ESP32.
-esp32 = [
-  "esp-hal/esp32",
-  "esp-hal-embassy?/esp32",
-  "esp-wifi-sys/esp32",
-]
+esp32 = ["esp-hal/esp32", "esp-hal-embassy?/esp32", "esp-wifi-sys/esp32"]
 # Target the ESP32-S2.
 esp32s2 = [
   "esp-hal/esp32s2",

@@ -2312,7 +2312,7 @@ pub struct WifiRxToken<MODE: Sealed> {
 impl<MODE: Sealed> WifiRxToken<MODE> {
     pub fn consume_token<R, F>(self, f: F) -> R
     where
-        F: FnOnce(&mut [u8]) -> R,
+        F: FnOnce(&[u8]) -> R,
     {
         let mut data = critical_section::with(|cs| {
             let mut queue = self.mode.data_queue_rx(cs);
@@ -2340,7 +2340,7 @@ impl<MODE: Sealed> WifiRxToken<MODE> {
 impl<MODE: Sealed> RxToken for WifiRxToken<MODE> {
     fn consume<R, F>(self, f: F) -> R
     where
-        F: FnOnce(&mut [u8]) -> R,
+        F: FnOnce(&[u8]) -> R,
     {
         self.consume_token(f)
     }
